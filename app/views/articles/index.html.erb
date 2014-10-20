@@ -1,0 +1,10 @@
+This is articles index page for api integration
+
+<% @articles.each do |article| %>
+
+	<p>
+		<b>Name</b> <%= article.name %>	
+	</p>
+	<%= link_to "show", article_path(article.id) %>
+
+<% end %>

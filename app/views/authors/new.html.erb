@@ -1,0 +1,19 @@
+<%= form_for @author do |f| %>	
+
+	<%# if @articles.present?%>
+	<%= f.select :article_id, options_for_select(@articles.map {|article| [article.name, article.id]}) %>
+	<%# end %>
+
+	<p>
+		<%= f.label :name %>
+	</p>
+
+	<p>
+		<%= f.text_field :name %>
+	</p>
+
+	<p>
+		<%= f.submit %>
+	</p>
+
+<% end %>
