@@ -1,4 +1,6 @@
 class ArticlesController < ApplicationController
+	respond_to :json
+	
 	def new
 		@article = Article.new
 	end

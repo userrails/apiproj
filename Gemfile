@@ -28,4 +28,8 @@ gem 'spring',        group: :development
 # Gemfile
 gem 'rabl'
 # Also add either `oj` or `yajl-ruby` as the JSON parser
-# gem 'oj'
+gem 'oj'
+
+gem 'pry-rails'
+
+gem 'httparty'

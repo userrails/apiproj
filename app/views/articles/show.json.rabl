@@ -1,9 +1,21 @@
 object @article
-attributes :id, :name, :created_at, :published_at
+attributes :id, :name, :created_at
 
-node(:edit_url) {|article| edit_article_url(article)}
+node do |article|
+	{
+		:last_updated_at => time_ago_in_words(article.updated_at),	
+		:edit_url => edit_article_url(article)
+	}
+end
 
-child :author do
+
+
+child :authors do
 	attributes :id, :name, :created_at, :updated_at
-	node(:url) {|author| author_url(author)}
+
+	node do |author|
+		{
+			:edit_url => edit_article_url(author)
+		}
+	end
 end
