@@ -1,6 +1,6 @@
 class ArticlesController < ApplicationController
 	respond_to :json
-	
+
 	def new
 		@article = Article.new
 	end
@@ -13,7 +13,7 @@ class ArticlesController < ApplicationController
 	end
 
 	def index
-		@articles = Article.all
+		@articles = Article.includes(:authors)
 	end
 
 	def show
@@ -21,7 +21,8 @@ class ArticlesController < ApplicationController
 		@authors = @article.authors
 	end
 
-	private 
+	private
+	
 	def article_params
 		params.require(:article).permit!
 	end
