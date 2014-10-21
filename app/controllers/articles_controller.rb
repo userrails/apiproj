@@ -1,11 +1,10 @@
 class ArticlesController < ApplicationController
-	respond_to :json
-
 	def new
 		@article = Article.new
 	end
 	
 	def create
+		#curl -X POST -d 'article[name]=article1' http://localhost:3000/api/articles.json
 		@article = Article.new(article_params)
 		if @article.save
 			redirect_to root_path
@@ -13,7 +12,7 @@ class ArticlesController < ApplicationController
 	end
 
 	def index
-		@articles = Article.includes(:authors)
+		@articles = Article.includes(:authors)	
 	end
 
 	def show

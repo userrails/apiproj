@@ -5,8 +5,14 @@ Rails.application.routes.draw do
 
   # You can have the root of your site routed with "root"
    root 'homes#index'
-   resources :articles, defaults: {format: :json}
+   resources :articles
    resources :authors
+
+   # routes for api
+  namespace :api do
+    resources :articles, defaults: {format: :json}
+    resources :authors 
+  end  
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 

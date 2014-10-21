@@ -13,11 +13,11 @@ class AuthorsController < ApplicationController
 	end
 
 	def index
-		@author = Author.all
+	   @author = Author.all
 	end
 
 	private 
 	def author_params
-		params.require(:author).permit!
+	  params.require(:author).permit!
 	end
 end
