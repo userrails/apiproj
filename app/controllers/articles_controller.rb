@@ -9,6 +9,7 @@ class ArticlesController < ApplicationController
 		#curl -X POST -d 'article[name]=article1' http://localhost:3000/api/articles.json
 		@article = Article.new(article_params)
 		if @article.save
+			flash[:message] = "Article created successfully"
 			redirect_to articles_path
 		end
 	end
@@ -26,6 +27,7 @@ class ArticlesController < ApplicationController
 		
 		@article = Article.find(params[:id])
 		if @article.destroy
+			flash[:message] = "Article destroyed successfully"
 			redirect_to articles_path
 		end
 		@authors = @article.authors

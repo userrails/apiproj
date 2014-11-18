@@ -8,6 +8,7 @@ class AuthorsController < ApplicationController
 		@articles = Article.all
 		@author = Author.new(author_params)
 		if @author.save
+			flash[:message] = "Autor created successfully"
 			redirect_to root_path
 		end
 	end

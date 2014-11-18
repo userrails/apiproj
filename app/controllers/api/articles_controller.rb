@@ -1,5 +1,5 @@
 class Api::ArticlesController < ApplicationController
-
+	before_filter :is_login?
 	def create
 		@article = Article.new(article_params)
 		if @article.save

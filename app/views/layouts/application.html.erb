@@ -8,14 +8,35 @@
   <%= csrf_meta_tags %>
 </head>
 
-<body>
+  <body>
 
-  <div>
-	  <% if current_user %>
-	  	<%= link_to "Sign Out", destroy_user_session_path, :method => :delete %>
-	  <% end %>
+    <div>
+  	  <% if current_user %>
+  	  	<%= link_to "Sign Out", destroy_user_session_path, :method => :delete %>
+  	  <% end %>
+    </div>
+
+<%# if message %>
+  <!-- <div class="alert alert-info" style="margin-top: 0px;">
+    <a class="close" data-dismiss="alert">×</a>
+    <strong><%#= message %></strong>
+  </div> -->
+<%# end %>
+
+<% if alert %>
+  <div class="alert alert-error">
+    <a class="close" data-dismiss="alert">×</a>
+    <strong><%= alert %></strong>
   </div>
-  <%= render :partial => "layouts/error"  %>
-  <%= yield %>
-</body>
+<% end %>
+
+<% if notice %>
+  <div class="alert alert-info" style="margin-top: 0px;">
+    <a class="close" data-dismiss="alert">×</a>
+    <strong><%= notice %></strong>
+  </div>
+<% end %>
+
+    <%= yield %>
+  </body>
 </html>
