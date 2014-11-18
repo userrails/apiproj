@@ -7,7 +7,7 @@ class ArticlesController < ApplicationController
 		#curl -X POST -d 'article[name]=article1' http://localhost:3000/api/articles.json
 		@article = Article.new(article_params)
 		if @article.save
-			redirect_to root_path
+			redirect_to articles_path
 		end
 	end
 
@@ -17,6 +17,15 @@ class ArticlesController < ApplicationController
 
 	def show
 		@article = Article.find(params[:id])
+		@authors = @article.authors
+	end
+
+	def destroy
+		
+		@article = Article.find(params[:id])
+		if @article.destroy
+			redirect_to articles_path
+		end
 		@authors = @article.authors
 	end
 

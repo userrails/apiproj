@@ -1,10 +1,26 @@
 This is articles index page for api integration
 
-<% @articles.each do |article| %>
 
-	<p>
-		<b>Name</b> <%= article.name %>	
-	</p>
-	<%= link_to "show", article_path(article.id) %>
+<table border="1">
+<tr>
+	<td colspan="2">
+		<%= link_to "New Article", new_article_path %>
+	</td>
+</tr>
 
-<% end %>
+	<tr>
+		<td>Name</td>
+		<td>Status</td>
+	</tr>
+	<% @articles.each do |article| %>
+		<tr>
+			<td>
+				<%= article.name %>	
+			</td>
+			<td>
+				<%= link_to "Show", article_path(article.id) %> |
+				<%= link_to "Delete", article_path(article.id), :method => :delete, :data => {:confirm => "Are you sure to delete ?"} %>
+			</td>
+		</tr>
+	<% end %>
+</table>

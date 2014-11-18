@@ -33,3 +33,4 @@ gem 'oj'
 gem 'pry-rails'
 
 gem 'httparty'
+gem 'devise'
