@@ -14,4 +14,11 @@ class ApplicationController < ActionController::Base
 		root_path
 	end
 
+ def is_login?
+    unless current_user
+      flash[:error] = "Please login"
+      redirect_to '/'
+    end
+  end
+
 end

@@ -9,11 +9,13 @@
 </head>
 
 <body>
+
   <div>
 	  <% if current_user %>
 	  	<%= link_to "Sign Out", destroy_user_session_path, :method => :delete %>
 	  <% end %>
   </div>
-    <%= yield %>
+  <%= render :partial => "layouts/error"  %>
+  <%= yield %>
 </body>
 </html>

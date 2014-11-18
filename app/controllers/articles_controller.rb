@@ -1,4 +1,6 @@
 class ArticlesController < ApplicationController
+	before_filter :is_login?
+	
 	def new
 		@article = Article.new
 	end
