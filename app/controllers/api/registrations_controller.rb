@@ -1,5 +1,6 @@
 class Api::RegistrationsController < Devise::RegistrationsController
-	respond_to :json
+   skip_before_filter :verify_authenticity_token
+	 respond_to :json
 
 	#curl -X POST -d 'user[email]=test1@gmail.com&user[password]=123123123' http://localhost:3000/api/users/sign_up.json
 	def create

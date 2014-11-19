@@ -1,5 +1,7 @@
 class Api::ArticlesController < Api::BaseControllerController
+	skip_before_filter :verify_authenticity_token
 	before_filter :is_login?
+	respond_to :json
 
 	#curl -X POST -d 'article[name]=article1' http://localhost:3000/api/articles.json
 	def create

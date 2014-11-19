@@ -1,6 +1,6 @@
 class Api::BaseControllerController < ApplicationController
+  skip_before_filter :verify_authenticity_token
   respond_to :json
-  
   before_filter :authenticate_user
    
   private
