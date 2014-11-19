@@ -1,9 +1,9 @@
-class Api::ArticlesController < Api::BaseControllerController
+class Api::ArticlesController < Api::BaseController
 	skip_before_filter :verify_authenticity_token
-	before_filter :is_login?
+	before_filter :authenticate_user
 	respond_to :json
 
-	#curl -X POST -d 'article[name]=article1' http://localhost:3000/api/articles.json
+	#curl -X POST -d 'article[name]=article1&api_key=peE5kohKwN' http://localhost:3000/api/articles.json
 	def create
 		@article = Article.new(article_params)
 		if @article.save
@@ -18,7 +18,7 @@ class Api::ArticlesController < Api::BaseControllerController
 		end
 	end
 
-	# curl -X GET http://localhost:3000/api/articles/17/show
+	# curl -X GET -d 'api_key=peE5kohKwN' http://localhost:3000/api/articles/17/show
 	def show
 		@article = Article.find(params[:id])
 		respond_to do |format|
@@ -27,7 +27,7 @@ class Api::ArticlesController < Api::BaseControllerController
 		@authors = @article.authors
 	end
 
-	# curl -X GET http://localhost:3000/api/articles
+	# curl -X GET -d 'api_key=peE5kohKwN' http://localhost:3000/api/articles
 	def index
 		@articles = Article.includes(:authors)
 
@@ -36,7 +36,7 @@ class Api::ArticlesController < Api::BaseControllerController
 		end
 	end
 
-	# curl -X DELETE http://localhost:3000/api/articles/16
+	# curl -X DELETE -d 'api_key=peE5kohKwN' http://localhost:3000/api/articles/16
 	def destroy
 		@article = Article.find(params[:id])
 		if @article.destroy
