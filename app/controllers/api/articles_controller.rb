@@ -1,7 +1,7 @@
 class Api::ArticlesController < Api::BaseController
 	skip_before_filter :verify_authenticity_token
 	before_filter :authenticate_user
-	respond_to :json
+	respond_to :json, :xml
 
 	#curl -X POST -d 'article[name]=article1&api_key=peE5kohKwN' http://localhost:3000/api/articles.json
 	def create
@@ -15,16 +15,20 @@ class Api::ArticlesController < Api::BaseController
 			format.json {
 				render json: @response_message
 			}
+
+			format.xml {
+				render xml: @response_message
+			}
 		end
 	end
 
-	# curl -X GET -d 'api_key=peE5kohKwN' http://localhost:3000/api/articles/17/show
+	# curl -X GET -d 'api_key=peE5kohKwN' http://localhost:3000/api/articles/33
 	def show
 		@article = Article.find(params[:id])
 		respond_to do |format|
 			format.json {render json: @article.to_json}
+			format.xml {render xml: @article.to_xml}
 		end
-		@authors = @article.authors
 	end
 
 	# curl -X GET -d 'api_key=peE5kohKwN' http://localhost:3000/api/articles
@@ -33,6 +37,7 @@ class Api::ArticlesController < Api::BaseController
 
 		respond_to do |format|
 			format.json {render json: @articles.to_json}
+			format.xml {render json: @articles.to_xml}
 		end
 	end
 
@@ -48,11 +53,13 @@ class Api::ArticlesController < Api::BaseController
 			format.json {
 				render json: @response_message
 			}
+			format.xml {
+				render xml: @response_message
+			}
 		end
 	end
 
 	private
-
 	def article_params
 		params.require(:article).permit!
 	end
