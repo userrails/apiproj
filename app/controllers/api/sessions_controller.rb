@@ -15,17 +15,21 @@ def create
 end
   
   #should log out the user, changing the authentication token.
-  #curl -X DELETE -d 'api_key=peE5kohKwN' http://localhost:3000/api/users/sign_out.json
+  #curl -X DELETE -d 'api_key=KJymebg-HT' http://localhost:3000/api/users/sign_out.json
 def destroy
     # expire auth token   
 	    @user=User.where(:authentication_token=>params[:api_key]).first
 	    if @user.present?
-	    @user.reset_authentication_token!
-	    render :json => { :message => ["Session deleted."], :success => true, :status => :ok}
-	else
-		respond_to do |format|
-        format.json{ render :json => { :error => "Api key is invalid." }}
+	    #@user.reset_authentication_token!
+      token = Devise.friendly_token[0,20]
+      unless @user.authentication_token == token
+        @user.update_attributes(:authentication_token => token)
       end
-	end
+	    render :json => { :message => ["Session deleted."], :success => true, :status => :ok}
+	   else
+		    respond_to do |format|
+          format.json{ render :json => { :error => "Api key is invalid." }}
+        end
+	   end
   end
 end
